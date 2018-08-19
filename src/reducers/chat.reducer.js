@@ -11,7 +11,6 @@ export const initialState = {
 
 function createSocket(state) {
     const socket = socketIOClient(SOCKET_URL);
-    console.log('socket', socket);
 
     return { ...state, socket }
 }

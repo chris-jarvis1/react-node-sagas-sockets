@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Header';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Message from '../../components/Message';
 
 class Chat extends Component {
     constructor() {
@@ -28,21 +29,24 @@ class Chat extends Component {
     render() {
 
         return (
-            <div style={{ textAlign: 'center' }}>
+            <div className="container">
                 <Header />
                 <form>
-                    <label>Name:</label>
-                    <input type="text" name="name" onChange={ event => this.onChangeHandler(event)}></input>
-                    <br/>
-                    <label>Message:</label>
-                    <input type="text" name="message" onChange={ event => this.onChangeHandler(event)}></input>
-                    <button type="button" onClick={ event => this.submit(event) }>Send message</button>
+                    <div className="form-group">
+                        <label>Name:</label>
+                        <input className="form-control" type="text" name="name" onChange={ event => this.onChangeHandler(event)}></input>
+                    </div>
+                    <div className="form-group">
+                        <label>Message:</label>
+                        <input className="form-control" type="text" name="message" onChange={ event => this.onChangeHandler(event)}></input>
+                    </div>
+                    <button className="btn btn-primary" type="button" onClick={ event => this.submit(event) }>Send message</button>
                 </form>
                 <h2>Messages</h2>
                 { this.props.messages.length > 0 &&
                     this.props.messages.map((message, index) => {
 
-                        return <div key={index}><div>Name: {message.name}</div><div>Message: {message.message}</div></div>
+                        return <Message key={index} name={ message.name } message={ message.message } />
                     })
                 }
             </div>

@@ -6,10 +6,10 @@ class Header extends Component {
         return (
             <div>
                 <h1>Welcome</h1>
-                <div>
-                    <Link to="/">Home</Link>
-                    <Link to="/chat">Chat</Link>
-                </div>
+                <nav className="navbar navbar-light bg-light">
+                    <Link className="navbar-brand" to="/">Home</Link>
+                    <Link className="navbar-brand" to="/chat">Chat</Link>
+                </nav>
             </div>
         );
     }

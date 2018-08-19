@@ -11,14 +11,17 @@ function *sendMessage(action) {
 
 function createSocketChannel(socket) {
     return eventChannel(emit => {
-
-        socket.on('RECEIVE_MESSAGE', data => {
+        const addMessage = data => {
             emit(data);
-        });
+        };
 
-        return () => {
-            console.log('unsubscribe');
+        socket.on('RECEIVE_MESSAGE', addMessage);
+
+        const unsubscribe = () => {
+            socket.off('RECEIVE_MESSAGE', addMessage)
         }
+
+        return unsubscribe;
     })
 }
 
