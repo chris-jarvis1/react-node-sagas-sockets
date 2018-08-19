@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import socketIOClient from 'socket.io-client';
 import Header from '../Header';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,7 +7,8 @@ class Chat extends Component {
     constructor() {
         super();
         this.state = {
-            message: ''
+            message: '',
+            name: ''
         };
     }
     componentDidMount() {
@@ -21,7 +21,7 @@ class Chat extends Component {
 
     submit(event) {
         event.preventDefault();
-        this.props.sendMessageHandler(this.state.message);
+        this.props.sendMessageHandler(this.state);
         this.setState({ message: '' });
     }
 
@@ -31,12 +31,19 @@ class Chat extends Component {
             <div style={{ textAlign: 'center' }}>
                 <Header />
                 <form>
+                    <label>Name:</label>
+                    <input type="text" name="name" onChange={ event => this.onChangeHandler(event)}></input>
+                    <br/>
+                    <label>Message:</label>
                     <input type="text" name="message" onChange={ event => this.onChangeHandler(event)}></input>
                     <button type="button" onClick={ event => this.submit(event) }>Send message</button>
                 </form>
                 <h2>Messages</h2>
                 { this.props.messages.length > 0 &&
-                    this.props.messages.map((message, index) => <div key={index}>{message.message}</div>)
+                    this.props.messages.map((message, index) => {
+
+                        return <div key={index}><div>Name: {message.name}</div><div>Message: {message.message}</div></div>
+                    })
                 }
             </div>
         );

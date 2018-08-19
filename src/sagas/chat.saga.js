@@ -5,7 +5,7 @@ function *sendMessage(action) {
     const socket = yield select(state => state.chat.socket);
 
     socket.emit('SEND_MESSAGE', {
-        message: action.message
+        message: JSON.stringify(action.message)
     });
 }
 
@@ -30,7 +30,7 @@ export function *watchChatEvents() {
     while (true) {
         try {
             const message = yield take(socketChannel);
-            yield put({ type: 'ADD_MESSAGE', message });
+            yield put({ type: 'ADD_MESSAGE', message: JSON.parse(message.message) });
         } catch (err) {
             console.error('socket error:', err)
         }
