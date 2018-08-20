@@ -22,11 +22,12 @@
     "socket.io": "^2.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node ./api/server.js",
+    "start-react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "server": "nodemon ./api/server.js",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm start\""
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start-react\""
   }
 }
