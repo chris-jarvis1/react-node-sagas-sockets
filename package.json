@@ -2,6 +2,10 @@
   "name": "react-boilerplate",
   "version": "0.1.0",
   "private": true,
+  "main": "./api/server.js",
+  "engines": {
+    "node": "10.8.0"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^3.3.7",
